@@ -1,1 +1,1 @@
-# algorithm
+# Leedcode pratice
