@@ -6,7 +6,7 @@ public:
         if (length < 3 )  
             return result;  
         sort(num.begin(),num.end());
-        for(int i = 0; i < num.size() - 2 && num[i] <= 0; ++ i)
+        for(int i = 0; i < num.size() ; ++ i)
         {
             if(i > 0 && num[i] == num[i - 1])
                 continue;
