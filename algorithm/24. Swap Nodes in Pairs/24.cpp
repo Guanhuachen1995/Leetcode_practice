@@ -9,14 +9,13 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        int first;  
-        ListNode* phead = head;  
-        while (head != nullptr && head->next != nullptr) {  
-            first = head->val;  
-            head->val = head->next->val;  
-            head->next->val = first;  
-            head = head->next->next;  
-        }  
-        return phead; 
+        if(head == NULL) return NULL;
+        if(head->next == NULL) return head;
+
+        ListNode* temp = head->next;
+        head->next = swapPairs(temp->next);
+        temp->next = head;
+
+        return temp;
     }
 };
