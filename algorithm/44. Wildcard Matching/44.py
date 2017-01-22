@@ -5,29 +5,23 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        isstar=False
-        s1,p1=0,0
-        while s1<len(s) and (p1<len(p) or isstar):
-            if s[s1]==p[p1] or p[p1]=='?':
-                s1+=1
-                p1+=1
-            elif p[p1]=='*':
-                isstar=True
-                p1+=1
-                if p1>=len(p):
-                    return True
-                ss=s1
-                pp=p1
+        p_ptr, s_ptr, last_s_ptr, last_p_ptr = 0, 0, -1, -1
+        while s_ptr < len(s):
+            if p_ptr < len(p) and (s[s_ptr] == p[p_ptr] or p[p_ptr] == '?'):
+                s_ptr += 1
+                p_ptr += 1
+            elif p_ptr < len(p) and p[p_ptr] == '*':
+                p_ptr += 1
+                last_s_ptr = s_ptr
+                last_p_ptr = p_ptr
+            elif last_p_ptr != -1:
+                last_s_ptr += 1
+                s_ptr = last_s_ptr
+                p_ptr = last_p_ptr
             else:
-                if not isstar:
-                    return False
-                p1=pp
-                s1=ss+1
-        if s1>=len(s):
-            if p1>=len(p):
-                return True
-            while p[p1]=='*':
-                p1+=1
-            if p1>=len(p):
-                return True
-        return False
+                return False
+            
+        while p_ptr < len(p) and p[p_ptr] == '*':
+            p_ptr += 1
+        
+        return p_ptr == len(p)
