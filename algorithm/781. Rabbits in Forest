@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numRabbits(vector<int>& answers) {
+        if(answers.size() == 0) return 0;
+        unordered_map<int, int> m;
+        int res = 0;
+        for(auto i : answers)
+            m[i]++;
+       
+        for(auto  iter = m.begin(); iter != m.end(); iter++) {
+            if(iter->second % (iter->first + 1) == 0)
+                res += (iter->first + 1)*(iter->second / (iter->first + 1));
+            else
+                res += (iter->first + 1)*(iter->second / (iter->first + 1) + 1);
+
+        }
+        return res;
+    }
+};
